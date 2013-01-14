@@ -70,7 +70,7 @@ public class ShortNumberUtil {
 
   private boolean matchesEmergencyNumberHelper(String number, String regionCode,
       boolean allowPrefixMatch) {
-    number = PhoneNumberUtil.extractNormalizedNumber(number);
+    number = PhoneNumberUtil.appendNormalizedNumber(number, null);
     if (PhoneNumberUtil.PLUS_CHARS_PATTERN.matcher(number).lookingAt()) {
       // Returns false if the number starts with a plus sign. We don't believe dialing the country
       // code before emergency numbers (e.g. +1911) works, but later, if that proves to work, we can

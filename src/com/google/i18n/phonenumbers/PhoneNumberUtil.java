@@ -703,36 +703,33 @@ public class PhoneNumberUtil
      * (530) 583-6985 x302 and (530) 583-6985 x2303. We remove the second extension so that the first
      * number is parsed correctly.
      *
-     * @param number the string that might contain a phone number
+     * @param number         the string that might contain a phone number
+     * @param nationalNumber
      * @return the number, stripped of any non-phone-number prefix (such as "Tel:") or an empty
      *         string if no character used to start phone numbers (such as + or any digit) is
      *         found in the number
      */
-    public static String extractNormalizedNumber(String number)
+    public static String appendNormalizedNumber(String number, StringBuilder nationalNumber)
     {
-        char[] array = new char[number.length()];
 
-        int len = 0;
         for (int i = 0; i < number.length(); ++i)
         {
             char c = number.charAt(i);
             if (c == PLUS_SIGN || c == FULL_WIDTH_PLUS_SIGN)
             {
-                array[len] = PLUS_SIGN;
-                len++;
+                nationalNumber.append(c);
             }
             else
             {
                 c = MY_MAPPINGS[c];
                 if (c != 0)
                 {
-                    array[len] = c;
-                    len++;
+                    nationalNumber.append(c);
                 }
             }
         }
 
-        return new String(array, 0, len);
+        return null;
 
     }
 
@@ -741,7 +738,7 @@ public class PhoneNumberUtil
      * moment, checks to see that the string begins with at least 2 digits, ignoring any punctuation
      * commonly found in phone numbers.
      * This method does not require the number to be normalized in advance - but does assume that
-     * leading non-number symbols have been removed, such as by the method extractNormalizedNumber.
+     * leading non-number symbols have been removed, such as by the method appendNormalizedNumber.
      *
      * @param number string to be checked for viability as a phone number
      * @return true if the number could be a phone number of some sort, otherwise false
@@ -3101,7 +3098,7 @@ public class PhoneNumberUtil
         }
 
         StringBuilder nationalNumber = new StringBuilder();
-        nationalNumber.append(extractNormalizedNumber(numberToParse));
+        appendNormalizedNumber(numberToParse, nationalNumber);
 
         if (!isViablePhoneNumber(nationalNumber.toString()))
         {
