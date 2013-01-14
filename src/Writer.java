@@ -18,10 +18,6 @@ public class Writer extends PrintWriter
 
     public void finish()
     {
-        if (fromFile)
-        {
-            println("time: " + (System.nanoTime() - start) / 1000000);
-        }
         flush();
         close();
     }

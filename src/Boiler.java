@@ -1,6 +1,4 @@
 import com.google.i18n.phonenumbers.NumberParseException;
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
-import com.google.i18n.phonenumbers.Phonenumber;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,13 +9,12 @@ public class Boiler
 {
     public static void main(String[] args) throws IOException, NumberParseException
     {
-        Reader reader = new Reader("large_input");
-        Writer writer = new Writer(new FileOutputStream("output"), true);
+        Reader reader = new Reader("numbers.txt");
+        Writer writer = new Writer(new FileOutputStream("output.txt"), true);
 
-        PhoneNumberUtil util = PhoneNumberUtil.getInstance();
-
+        PhoneNumberBoiler phoneNumberBoiler = new PhoneNumberBoiler();
         List<String> numbers = new ArrayList<String>();
-        List<Phonenumber.PhoneNumber> boiledNumbers = new ArrayList<Phonenumber.PhoneNumber>();
+        List<String> boiledNumbers = new ArrayList<String>();
 
         String number = reader.nextLine();
         while (number != null)
@@ -30,17 +27,18 @@ public class Boiler
         long start = System.nanoTime();
         for (String raw_number : numbers)
         {
-            Phonenumber.PhoneNumber in = util.parse(raw_number, "IN");
+            String in = phoneNumberBoiler.getBoiledNumber(raw_number);
             boiledNumbers.add(in);
         }
         System.out.println("time " + (System.nanoTime() - start) / 1000000);
 
 
-        for (Phonenumber.PhoneNumber phoneNumber : boiledNumbers)
+        for (String phoneNumber : boiledNumbers)
         {
-            writer.append("+" + phoneNumber.getCountryCode()).append("-" + phoneNumber.getNationalNumber()).append("\n");
+            writer.append(phoneNumber).append("\n");
         }
 
         writer.finish();
     }
+
 }
