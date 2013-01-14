@@ -3113,11 +3113,11 @@ public class PhoneNumberUtil
         }
         // Attempt to parse extension first, since it doesn't require region-specific data and we want
         // to have the non-normalised number here.
-        String extension = maybeStripExtension(nationalNumber);
-        if (extension.length() > 0)
-        {
-            phoneNumber.setExtension(extension);
-        }
+//        String extension = maybeStripExtension(nationalNumber);
+//        if (extension.length() > 0)
+//        {
+//            phoneNumber.setExtension(extension);
+//        }
 
         PhoneMetadata regionMetadata = getMetadataForRegion(defaultRegion);
         // Check to see if the number is given in international format so we know whether this number is
