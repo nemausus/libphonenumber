@@ -23,7 +23,7 @@ public class PhoneNumberBoiler
     {
         try
         {
-            Phonenumber.PhoneNumber phoneNumber = phoneNumberUtil.parse(number, "IN");
+            Phonenumber.PhoneNumber phoneNumber = phoneNumberUtil.TalkToParse(number, "IN");
             if (phoneNumberUtil.isValidNumber(phoneNumber) || phoneNumberUtil.truncateTooLongNumber(phoneNumber))
             {
                 if (mValidCellNumbers.contains(phoneNumberUtil.getNumberType(phoneNumber)))
