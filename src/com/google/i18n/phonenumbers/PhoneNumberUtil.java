@@ -124,21 +124,6 @@ public class PhoneNumberUtil
         // Simple ASCII digits map used to populate ALPHA_PHONE_MAPPINGS and
         // ALL_PLUS_NUMBER_GROUPING_SYMBOLS.
 
-        for (char i = '0'; i <= '9'; ++i)
-        {
-            MY_MAPPINGS[i] = i;
-        }
-
-        for (char i = 'a'; i <= 'z'; ++i)
-        {
-            MY_MAPPINGS[i] = i;
-        }
-
-        for (char i = 'A'; i <= 'Z'; ++i)
-        {
-            MY_MAPPINGS[i] = i;
-        }
-
         HashMap<Character, Character> asciiDigitMappings = new HashMap<Character, Character>();
         asciiDigitMappings.put('0', '0');
         asciiDigitMappings.put('1', '1');
@@ -178,6 +163,22 @@ public class PhoneNumberUtil
         alphaMap.put('X', '9');
         alphaMap.put('Y', '9');
         alphaMap.put('Z', '9');
+
+        for (char i = '0'; i <= '9'; ++i)
+        {
+            MY_MAPPINGS[i] = i;
+        }
+
+        for (char i = 'a'; i <= 'z'; ++i)
+        {
+            MY_MAPPINGS[i] = alphaMap.get(Character.toUpperCase(i));
+        }
+
+        for (char i = 'A'; i <= 'Z'; ++i)
+        {
+            MY_MAPPINGS[i] = alphaMap.get(i);
+        }
+
         ALPHA_MAPPINGS = Collections.unmodifiableMap(alphaMap);
 
         HashMap<Character, Character> combinedMap = new HashMap<Character, Character>(100);
@@ -707,7 +708,7 @@ public class PhoneNumberUtil
      *         string if no character used to start phone numbers (such as + or any digit) is
      *         found in the number
      */
-    static String extractNormalizedNumber(String number)
+    public static String extractNormalizedNumber(String number)
     {
         char[] array = new char[number.length()];
 
@@ -731,7 +732,7 @@ public class PhoneNumberUtil
             }
         }
 
-        return len == number.length() ? number : new String(array, 0, len);
+        return new String(array, 0, len);
 
     }
 
@@ -769,18 +770,18 @@ public class PhoneNumberUtil
      * @param number a string of characters representing a phone number
      * @return the normalized string version of the phone number
      */
-//    static String normalize(String number)
-//    {
-//        Matcher m = VALID_ALPHA_PHONE_PATTERN.matcher(number);
-//        if (m.matches())
-//        {
-//            return normalizeHelper(number, ALPHA_PHONE_MAPPINGS, true);
-//        }
-//        else
-//        {
-//            return normalizeDigitsOnly(number);
-//        }
-//    }
+    //    static String normalize(String number)
+    //    {
+    //        Matcher m = VALID_ALPHA_PHONE_PATTERN.matcher(number);
+    //        if (m.matches())
+    //        {
+    //            return normalizeHelper(number, ALPHA_PHONE_MAPPINGS, true);
+    //        }
+    //        else
+    //        {
+    //            return normalizeDigitsOnly(number);
+    //        }
+    //    }
 
     /**
      * Normalizes a string of characters representing a phone number. This is a wrapper for
@@ -789,12 +790,12 @@ public class PhoneNumberUtil
      * @param number a StringBuilder of characters representing a phone number that will be
      *               normalized in place
      */
-//    static void normalize(StringBuilder number)
-//    {
-//
-//        String normalizedNumber = normalize(number.toString());
-//        number.replace(0, number.length(), normalizedNumber);
-//    }
+    //    static void normalize(StringBuilder number)
+    //    {
+    //
+    //        String normalizedNumber = normalize(number.toString());
+    //        number.replace(0, number.length(), normalizedNumber);
+    //    }
 
     /**
      * Normalizes a string of characters representing a phone number. This converts wide-ascii and

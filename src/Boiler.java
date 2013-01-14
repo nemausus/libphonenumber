@@ -4,6 +4,8 @@ import com.google.i18n.phonenumbers.Phonenumber;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Boiler
 {
@@ -14,16 +16,30 @@ public class Boiler
 
         PhoneNumberUtil util = PhoneNumberUtil.getInstance();
 
+        List<String> numbers = new ArrayList<String>();
+        List<Phonenumber.PhoneNumber> boiledNumbers = new ArrayList<Phonenumber.PhoneNumber>();
+
         String number = reader.nextLine();
-        long start = System.nanoTime();
         while (number != null)
         {
-            Phonenumber.PhoneNumber phoneNumber = util.parse(number, "IN");
-            writer.append("+" + phoneNumber.getCountryCode()).append("-" + phoneNumber.getNationalNumber()).append("\n");
+            numbers.add(number);
             number = reader.nextLine();
         }
 
-        System.out.println("time " + (System.nanoTime() - start)/1000000);
+
+        long start = System.nanoTime();
+        for (String raw_number : numbers)
+        {
+            Phonenumber.PhoneNumber in = util.parse(raw_number, "IN");
+            boiledNumbers.add(in);
+        }
+        System.out.println("time " + (System.nanoTime() - start) / 1000000);
+
+
+        for (Phonenumber.PhoneNumber phoneNumber : boiledNumbers)
+        {
+            writer.append("+" + phoneNumber.getCountryCode()).append("-" + phoneNumber.getNationalNumber()).append("\n");
+        }
 
         writer.finish();
     }
