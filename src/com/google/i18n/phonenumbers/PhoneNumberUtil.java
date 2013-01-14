@@ -91,6 +91,9 @@ public class PhoneNumberUtil
 
     // The PLUS_SIGN signifies the international prefix.
     static final char PLUS_SIGN = '+';
+    static final char FULL_WIDTH_PLUS_SIGN = '\uFF0B';
+    static final char DIGIT_ZERO = '0';
+    static final char DIGIT_NINE = '9';
 
     private static final char STAR_SIGN = '*';
 
@@ -114,10 +117,28 @@ public class PhoneNumberUtil
     // includes digits, ASCII letters and number grouping symbols such as "-" and " ".
     private static final Map<Character, Character> ALL_PLUS_NUMBER_GROUPING_SYMBOLS;
 
+    private static final char[] MY_MAPPINGS = new char[127];
+
     static
     {
         // Simple ASCII digits map used to populate ALPHA_PHONE_MAPPINGS and
         // ALL_PLUS_NUMBER_GROUPING_SYMBOLS.
+
+        for (char i = '0'; i <= '9'; ++i)
+        {
+            MY_MAPPINGS[i] = i;
+        }
+
+        for (char i = 'a'; i <= 'z'; ++i)
+        {
+            MY_MAPPINGS[i] = i;
+        }
+
+        for (char i = 'A'; i <= 'Z'; ++i)
+        {
+            MY_MAPPINGS[i] = i;
+        }
+
         HashMap<Character, Character> asciiDigitMappings = new HashMap<Character, Character>();
         asciiDigitMappings.put('0', '0');
         asciiDigitMappings.put('1', '1');
@@ -269,10 +290,7 @@ public class PhoneNumberUtil
     // have alpha-characters and punctuation.
     //
     // Note VALID_PUNCTUATION starts with a -, so must be the first in the range.
-    private static final String VALID_PHONE_NUMBER =
-            DIGITS + "{" + MIN_LENGTH_FOR_NSN + "}" + "|" +
-                    "[" + PLUS_CHARS + "]*+(?:[" + VALID_PUNCTUATION + STAR_SIGN + "]*" + DIGITS + "){3,}[" +
-                    VALID_PUNCTUATION + STAR_SIGN + VALID_ALPHA + DIGITS + "]*";
+    private static final String VALID_PHONE_NUMBER = "[" + PLUS_SIGN + "]?" + DIGITS + "{" + MIN_LENGTH_FOR_NSN + ",}";
 
     // Default extension prefix to use when formatting. This will be put in front of any extension
     // component of the number, after the main national number is formatted. For example, if you wish
@@ -689,31 +707,32 @@ public class PhoneNumberUtil
      *         string if no character used to start phone numbers (such as + or any digit) is
      *         found in the number
      */
-    static String extractPossibleNumber(String number)
+    static String extractNormalizedNumber(String number)
     {
-        Matcher m = VALID_START_CHAR_PATTERN.matcher(number);
-        if (m.find())
+        char[] array = new char[number.length()];
+
+        int len = 0;
+        for (int i = 0; i < number.length(); ++i)
         {
-            number = number.substring(m.start());
-            // Remove trailing non-alpha non-numerical characters.
-            Matcher trailingCharsMatcher = UNWANTED_END_CHAR_PATTERN.matcher(number);
-            if (trailingCharsMatcher.find())
+            char c = number.charAt(i);
+            if (c == PLUS_SIGN || c == FULL_WIDTH_PLUS_SIGN)
             {
-                number = number.substring(0, trailingCharsMatcher.start());
-                LOGGER.log(Level.FINER, "Stripped trailing characters: " + number);
+                array[len] = PLUS_SIGN;
+                len++;
             }
-            // Check for extra numbers at the end.
-            Matcher secondNumber = SECOND_NUMBER_START_PATTERN.matcher(number);
-            if (secondNumber.find())
+            else
             {
-                number = number.substring(0, secondNumber.start());
+                c = MY_MAPPINGS[c];
+                if (c != 0)
+                {
+                    array[len] = c;
+                    len++;
+                }
             }
-            return number;
         }
-        else
-        {
-            return "";
-        }
+
+        return len == number.length() ? number : new String(array, 0, len);
+
     }
 
     /**
@@ -721,7 +740,7 @@ public class PhoneNumberUtil
      * moment, checks to see that the string begins with at least 2 digits, ignoring any punctuation
      * commonly found in phone numbers.
      * This method does not require the number to be normalized in advance - but does assume that
-     * leading non-number symbols have been removed, such as by the method extractPossibleNumber.
+     * leading non-number symbols have been removed, such as by the method extractNormalizedNumber.
      *
      * @param number string to be checked for viability as a phone number
      * @return true if the number could be a phone number of some sort, otherwise false
@@ -729,12 +748,9 @@ public class PhoneNumberUtil
     // @VisibleForTesting
     static boolean isViablePhoneNumber(String number)
     {
-        if (number.length() < MIN_LENGTH_FOR_NSN)
-        {
-            return false;
-        }
-        Matcher m = VALID_PHONE_NUMBER_PATTERN.matcher(number);
-        return m.matches();
+        int index = number.lastIndexOf(PLUS_SIGN);
+        return (index == -1 || index == 0) && number.length() >= MIN_LENGTH_FOR_NSN;
+
     }
 
     /**
@@ -753,18 +769,18 @@ public class PhoneNumberUtil
      * @param number a string of characters representing a phone number
      * @return the normalized string version of the phone number
      */
-    static String normalize(String number)
-    {
-        Matcher m = VALID_ALPHA_PHONE_PATTERN.matcher(number);
-        if (m.matches())
-        {
-            return normalizeHelper(number, ALPHA_PHONE_MAPPINGS, true);
-        }
-        else
-        {
-            return normalizeDigitsOnly(number);
-        }
-    }
+//    static String normalize(String number)
+//    {
+//        Matcher m = VALID_ALPHA_PHONE_PATTERN.matcher(number);
+//        if (m.matches())
+//        {
+//            return normalizeHelper(number, ALPHA_PHONE_MAPPINGS, true);
+//        }
+//        else
+//        {
+//            return normalizeDigitsOnly(number);
+//        }
+//    }
 
     /**
      * Normalizes a string of characters representing a phone number. This is a wrapper for
@@ -773,11 +789,12 @@ public class PhoneNumberUtil
      * @param number a StringBuilder of characters representing a phone number that will be
      *               normalized in place
      */
-    static void normalize(StringBuilder number)
-    {
-        String normalizedNumber = normalize(number.toString());
-        number.replace(0, number.length(), normalizedNumber);
-    }
+//    static void normalize(StringBuilder number)
+//    {
+//
+//        String normalizedNumber = normalize(number.toString());
+//        number.replace(0, number.length(), normalizedNumber);
+//    }
 
     /**
      * Normalizes a string of characters representing a phone number. This converts wide-ascii and
@@ -2773,7 +2790,7 @@ public class PhoneNumberUtil
             Matcher digitMatcher = CAPTURING_DIGIT_PATTERN.matcher(number.substring(matchEnd));
             if (digitMatcher.find())
             {
-                String normalizedGroup = normalizeDigitsOnly(digitMatcher.group(1));
+                String normalizedGroup = digitMatcher.group(1);
                 if (normalizedGroup.equals("0"))
                 {
                     return false;
@@ -2807,17 +2824,16 @@ public class PhoneNumberUtil
             return CountryCodeSource.FROM_DEFAULT_COUNTRY;
         }
         // Check to see if the number begins with one or more plus signs.
-        Matcher m = PLUS_CHARS_PATTERN.matcher(number);
-        if (m.lookingAt())
+        if (number.charAt(0) == PLUS_SIGN)
         {
-            number.delete(0, m.end());
+            number.deleteCharAt(0);
             // Can now normalize the rest of the number since we've consumed the "+" sign at the start.
-            normalize(number);
+            //normalize(number);
             return CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN;
         }
         // Attempt to parse the first digits as an international prefix.
         Pattern iddPattern = regexCache.getPatternForRegex(possibleIddPrefix);
-        normalize(number);
+        //normalize(number);
         return parsePrefixAsIdd(iddPattern, number)
                 ? CountryCodeSource.FROM_NUMBER_WITH_IDD
                 : CountryCodeSource.FROM_DEFAULT_COUNTRY;
@@ -2833,6 +2849,7 @@ public class PhoneNumberUtil
      * @return true if a national prefix or carrier code (or both) could be extracted.
      */
     // @VisibleForTesting
+
     boolean maybeStripNationalPrefixAndCarrierCode(
             StringBuilder number, PhoneMetadata metadata, StringBuilder carrierCode)
     {
@@ -2935,8 +2952,7 @@ public class PhoneNumberUtil
         if (!isValidRegionCode(defaultRegion))
         {
             // If the number is null or empty, we can't infer the region.
-            if (numberToParse == null || numberToParse.length() == 0 ||
-                    !PLUS_CHARS_PATTERN.matcher(numberToParse).lookingAt())
+            if (numberToParse == null || numberToParse.length() == 0 || numberToParse.charAt(0) != PLUS_SIGN)
             {
                 return false;
             }
@@ -3084,7 +3100,7 @@ public class PhoneNumberUtil
         }
 
         StringBuilder nationalNumber = new StringBuilder();
-        nationalNumber.append(extractPossibleNumber(numberToParse));
+        nationalNumber.append(extractNormalizedNumber(numberToParse));
 
         if (!isViablePhoneNumber(nationalNumber.toString()))
         {
@@ -3118,9 +3134,6 @@ public class PhoneNumberUtil
         int countryCode = 0;
         try
         {
-            // TODO: This method should really just take in the string buffer that has already
-            // been created, and just remove the prefix, rather than taking in a string and then
-            // outputting a string buffer.
             countryCode = maybeExtractCountryCode(nationalNumber, regionMetadata, keepRawInput, phoneNumber);
         }
         catch (NumberParseException e)
@@ -3156,7 +3169,7 @@ public class PhoneNumberUtil
         {
             // If no extracted country calling code, use the region supplied instead. The national number
             // is just the normalized version of the number we were given to parse.
-            normalize(nationalNumber);
+            //normalize(nationalNumber);
             if (defaultRegion != null)
             {
                 countryCode = regionMetadata.getCountryCode();
