@@ -39,7 +39,7 @@ import java.util.logging.Logger;
  */
 class MetadataManager {
   private static final String ALTERNATE_FORMATS_FILE_PREFIX =
-      "/com/google/i18n/phonenumbers/data/PhoneNumberAlternateFormatsProto";
+      "src/com/google/i18n/phonenumbers/data/PhoneNumberAlternateFormatsProto";
 
   private static final Logger LOGGER = Logger.getLogger(MetadataManager.class.getName());
 
