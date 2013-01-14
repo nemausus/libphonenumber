@@ -1121,7 +1121,7 @@ public class PhoneNumberUtil
      */
     public String format(PhoneNumber number, PhoneNumberFormat numberFormat)
     {
-        if (number.getNationalNumber() == 0 && number.hasRawInput())
+        if (number.getNationalNumber() == null && number.hasRawInput())
         {
             // Unparseable numbers that kept their raw input just use that.
             // This is the only case where a number can be formatted as E164 without a
@@ -1799,10 +1799,11 @@ public class PhoneNumberUtil
      */
     public String getNationalSignificantNumber(PhoneNumber number)
     {
+        return number.getNationalNumber();
         // If a leading zero has been set, we prefix this now. Note this is not a national prefix.
-        StringBuilder nationalNumber = new StringBuilder(number.isItalianLeadingZero() ? "0" : "");
-        nationalNumber.append(number.getNationalNumber());
-        return nationalNumber.toString();
+//        StringBuilder nationalNumber = new StringBuilder(number.isItalianLeadingZero() ? "0" : "");
+//        nationalNumber.append(number.getNationalNumber());
+//        return nationalNumber.toString();
     }
 
     /**
@@ -2614,13 +2615,13 @@ public class PhoneNumberUtil
         }
         PhoneNumber numberCopy = new PhoneNumber();
         numberCopy.mergeFrom(number);
-        long nationalNumber = number.getNationalNumber();
+        String nationalNumber = number.getNationalNumber();
         do
         {
-            nationalNumber /= 10;
+            nationalNumber = nationalNumber.substring(0, nationalNumber.length()-1);
             numberCopy.setNationalNumber(nationalNumber);
             if (isPossibleNumberWithReason(numberCopy) == ValidationResult.TOO_SHORT ||
-                    nationalNumber == 0)
+                    nationalNumber.length() == 0)
             {
                 return false;
             }
@@ -3235,7 +3236,7 @@ public class PhoneNumberUtil
         {
             phoneNumber.setItalianLeadingZero(true);
         }
-        phoneNumber.setNationalNumber(Long.parseLong(nationalNumber.toString()));
+        phoneNumber.setNationalNumber(nationalNumber.toString());
 
         return phoneNumber;
     }
@@ -3481,7 +3482,7 @@ public class PhoneNumberUtil
         {
             phoneNumber.setItalianLeadingZero(true);
         }
-        phoneNumber.setNationalNumber(Long.parseLong(normalizedNationalNumber.toString()));
+        phoneNumber.setNationalNumber(normalizedNationalNumber.toString());
     }
 
     /**

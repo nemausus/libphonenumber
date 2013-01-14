@@ -77,19 +77,19 @@ public final class Phonenumber
 
         // required uint64 national_number = 2;
         private boolean hasNationalNumber;
-        private long nationalNumber_ = 0L;
+        private String nationalNumber_;
 
         public boolean hasNationalNumber()
         {
             return hasNationalNumber;
         }
 
-        public long getNationalNumber()
+        public String getNationalNumber()
         {
             return nationalNumber_;
         }
 
-        public PhoneNumber setNationalNumber(long value)
+        public PhoneNumber setNationalNumber(String value)
         {
             hasNationalNumber = true;
             nationalNumber_ = value;
@@ -99,7 +99,7 @@ public final class Phonenumber
         public PhoneNumber clearNationalNumber()
         {
             hasNationalNumber = false;
-            nationalNumber_ = 0L;
+            nationalNumber_ = null;
             return this;
         }
 
