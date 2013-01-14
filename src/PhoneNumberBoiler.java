@@ -24,11 +24,22 @@ public class PhoneNumberBoiler
         try
         {
             Phonenumber.PhoneNumber phoneNumber = phoneNumberUtil.TalkToParse(number, "IN");
-            if (phoneNumberUtil.isValidNumber(phoneNumber) || phoneNumberUtil.truncateTooLongNumber(phoneNumber))
+
+            PhoneNumberUtil.PhoneNumberType numberType = phoneNumberUtil.getNumberType(phoneNumber);
+
+            if (mValidCellNumbers.contains(numberType))
             {
-                if (mValidCellNumbers.contains(phoneNumberUtil.getNumberType(phoneNumber)))
+                return "+" + phoneNumber.getCountryCode() + "-" + phoneNumber.getNationalNumber();
+            }
+            else if (numberType.equals(PhoneNumberUtil.PhoneNumberType.UNKNOWN))
+            {
+                if (phoneNumberUtil.truncateTooLongNumber(phoneNumber))
                 {
-                    return "+" + phoneNumber.getCountryCode() + "-" + phoneNumber.getNationalNumber();
+                    numberType = phoneNumberUtil.getNumberType(phoneNumber);
+                    if (mValidCellNumbers.contains(numberType))
+                    {
+                        return "+" + phoneNumber.getCountryCode() + "-" + phoneNumber.getNationalNumber();
+                    }
                 }
             }
         }
