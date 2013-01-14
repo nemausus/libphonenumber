@@ -333,7 +333,7 @@ public class PhoneNumberUtil
     // We append optionally the extension pattern to the end here, as a valid phone number may
     // have an extension prefix appended, followed by 1 or more digits.
     private static final Pattern VALID_PHONE_NUMBER_PATTERN =
-            Pattern.compile(VALID_PHONE_NUMBER + "(?:" + EXTN_PATTERNS_FOR_PARSING + ")?", REGEX_FLAGS);
+            Pattern.compile(VALID_PHONE_NUMBER, REGEX_FLAGS);
 
     static final Pattern NON_DIGITS_PATTERN = Pattern.compile("(\\D+)");
 
