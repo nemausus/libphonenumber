@@ -10,7 +10,7 @@ public class Boiler
     public static void main(String[] args) throws IOException, NumberParseException
     {
         Reader reader = new Reader("large_input");
-        Writer writer = new Writer(new FileOutputStream("large_output"), true);
+        Writer writer = new Writer(new FileOutputStream("output"), true);
 
         PhoneNumberUtil util = PhoneNumberUtil.getInstance();
 

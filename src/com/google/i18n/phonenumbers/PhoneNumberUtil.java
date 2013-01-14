@@ -3091,7 +3091,7 @@ public class PhoneNumberUtil
         }
 
         StringBuilder nationalNumber = new StringBuilder();
-        buildNationalNumberForParsing(numberToParse, nationalNumber);
+        nationalNumber.append(extractPossibleNumber(numberToParse));
 
         if (!isViablePhoneNumber(nationalNumber.toString()))
         {
@@ -3208,59 +3208,6 @@ public class PhoneNumberUtil
             phoneNumber.setItalianLeadingZero(true);
         }
         phoneNumber.setNationalNumber(Long.parseLong(normalizedNationalNumber.toString()));
-    }
-
-    /**
-     * Converts numberToParse to a form that we can parse and write it to nationalNumber if it is
-     * written in RFC3966; otherwise extract a possible number out of it and write to nationalNumber.
-     */
-    private void buildNationalNumberForParsing(String numberToParse, StringBuilder nationalNumber)
-    {
-        int indexOfPhoneContext = numberToParse.indexOf(RFC3966_PHONE_CONTEXT);
-        if (indexOfPhoneContext > 0)
-        {
-            int phoneContextStart = indexOfPhoneContext + RFC3966_PHONE_CONTEXT.length();
-            // If the phone context contains a phone number prefix, we need to capture it, whereas domains
-            // will be ignored.
-            if (numberToParse.charAt(phoneContextStart) == PLUS_SIGN)
-            {
-                // Additional parameters might follow the phone context. If so, we will remove them here
-                // because the parameters after phone context are not important for parsing the
-                // phone number.
-                int phoneContextEnd = numberToParse.indexOf(';', phoneContextStart);
-                if (phoneContextEnd > 0)
-                {
-                    nationalNumber.append(numberToParse.substring(phoneContextStart, phoneContextEnd));
-                }
-                else
-                {
-                    nationalNumber.append(numberToParse.substring(phoneContextStart));
-                }
-            }
-
-            // Now append everything between the "tel:" prefix and the phone-context. This should include
-            // the national number, an optional extension or isdn-subaddress component.
-            nationalNumber.append(numberToParse.substring(
-                    numberToParse.indexOf(RFC3966_PREFIX) + RFC3966_PREFIX.length(), indexOfPhoneContext));
-        }
-        else
-        {
-            // Extract a possible number from the string passed in (this strips leading characters that
-            // could not be the start of a phone number.)
-            nationalNumber.append(extractPossibleNumber(numberToParse));
-        }
-
-        // Delete the isdn-subaddress and everything after it if it is present. Note extension won't
-        // appear at the same time with isdn-subaddress according to paragraph 5.3 of the RFC3966 spec,
-        int indexOfIsdn = nationalNumber.indexOf(RFC3966_ISDN_SUBADDRESS);
-        if (indexOfIsdn > 0)
-        {
-            nationalNumber.delete(indexOfIsdn, nationalNumber.length());
-        }
-        // If both phone context and isdn-subaddress are absent but other parameters are present, the
-        // parameters are left in nationalNumber. This is because we are concerned about deleting
-        // content from a potential number string when there is no strong evidence that the number is
-        // actually written in RFC3966.
     }
 
     /**
