@@ -2627,7 +2627,7 @@ public class PhoneNumberUtil
     // nationalNumber. It assumes that the leading plus sign or IDD has already been removed. Returns
     // 0 if fullNumber doesn't start with a valid country calling code, and leaves nationalNumber
     // unmodified.
-    int extractCountryCode(StringBuilder fullNumber, StringBuilder nationalNumber)
+    int extractCountryCode(StringBuilder fullNumber)
     {
         if ((fullNumber.length() == 0) || (fullNumber.charAt(0) == '0'))
         {
@@ -2641,7 +2641,7 @@ public class PhoneNumberUtil
             potentialCountryCode = Integer.parseInt(fullNumber.substring(0, i));
             if (countryCallingCodeToRegionCodeMap.containsKey(potentialCountryCode))
             {
-                nationalNumber.append(fullNumber.substring(i));
+                fullNumber.delete(0, i);
                 return potentialCountryCode;
             }
         }
@@ -2666,12 +2666,9 @@ public class PhoneNumberUtil
      * It will throw a NumberParseException if the number starts with a '+' but the country calling
      * code supplied after this does not match that of any known region.
      *
-     * @param number                non-normalized telephone number that we wish to extract a country calling
+     * @param fullNumber            non-normalized telephone number that we wish to extract a country calling
      *                              code from - may begin with '+'
      * @param defaultRegionMetadata metadata about the region this number may be from
-     * @param nationalNumber        a string buffer to store the national significant number in, in the case
-     *                              that a country calling code was extracted. The number is appended to any existing contents.
-     *                              If no country calling code was extracted, this will be left unchanged.
      * @param keepRawInput          true if the country_code_source and preferred_carrier_code fields of
      *                              phoneNumber should be populated.
      * @param phoneNumber           the PhoneNumber object where the country_code and country_code_source need
@@ -2680,16 +2677,13 @@ public class PhoneNumberUtil
      * @return the country calling code extracted or 0 if none could be extracted
      */
     // @VisibleForTesting
-    int maybeExtractCountryCode(String number, PhoneMetadata defaultRegionMetadata,
-                                StringBuilder nationalNumber, boolean keepRawInput,
-                                PhoneNumber phoneNumber)
+    int maybeExtractCountryCode(StringBuilder fullNumber, PhoneMetadata defaultRegionMetadata, boolean keepRawInput, PhoneNumber phoneNumber)
             throws NumberParseException
     {
-        if (number.length() == 0)
+        if (fullNumber.length() == 0)
         {
             return 0;
         }
-        StringBuilder fullNumber = new StringBuilder(number);
         // Set the default prefix to be something that will never match.
         String possibleCountryIddPrefix = "NonMatch";
         if (defaultRegionMetadata != null)
@@ -2711,7 +2705,7 @@ public class PhoneNumberUtil
                         "Phone number had an IDD, but after this was not "
                                 + "long enough to be a viable phone number.");
             }
-            int potentialCountryCode = extractCountryCode(fullNumber, nationalNumber);
+            int potentialCountryCode = extractCountryCode(fullNumber);
             if (potentialCountryCode != 0)
             {
                 phoneNumber.setCountryCode(potentialCountryCode);
@@ -2733,24 +2727,23 @@ public class PhoneNumberUtil
             String normalizedNumber = fullNumber.toString();
             if (normalizedNumber.startsWith(defaultCountryCodeString))
             {
-                StringBuilder potentialNationalNumber =
-                        new StringBuilder(normalizedNumber.substring(defaultCountryCodeString.length()));
+                fullNumber.delete(0, defaultCountryCodeString.length());
+
+                //                StringBuilder potentialNationalNumber =
+                //                        new StringBuilder(normalizedNumber.substring(defaultCountryCodeString.length()));
                 PhoneNumberDesc generalDesc = defaultRegionMetadata.getGeneralDesc();
                 Pattern validNumberPattern =
                         regexCache.getPatternForRegex(generalDesc.getNationalNumberPattern());
-                maybeStripNationalPrefixAndCarrierCode(
-                        potentialNationalNumber, defaultRegionMetadata, null /* Don't need the carrier code */);
-                Pattern possibleNumberPattern =
-                        regexCache.getPatternForRegex(generalDesc.getPossibleNumberPattern());
+                maybeStripNationalPrefixAndCarrierCode(fullNumber, defaultRegionMetadata, null /* Don't need the carrier code */);
+                Pattern possibleNumberPattern = regexCache.getPatternForRegex(generalDesc.getPossibleNumberPattern());
                 // If the number was not valid before but is valid now, or if it was too long before, we
                 // consider the number with the country calling code stripped to be a better result and
                 // keep that instead.
-                if ((!validNumberPattern.matcher(fullNumber).matches() &&
-                        validNumberPattern.matcher(potentialNationalNumber).matches()) ||
-                        testNumberLengthAgainstPattern(possibleNumberPattern, fullNumber.toString())
+                if ((!validNumberPattern.matcher(normalizedNumber).matches() &&
+                        validNumberPattern.matcher(fullNumber).matches()) ||
+                        testNumberLengthAgainstPattern(possibleNumberPattern, normalizedNumber)
                                 == ValidationResult.TOO_LONG)
                 {
-                    nationalNumber.append(potentialNationalNumber);
                     if (keepRawInput)
                     {
                         phoneNumber.setCountryCodeSource(CountryCodeSource.FROM_NUMBER_WITHOUT_PLUS_SIGN);
@@ -3113,24 +3106,22 @@ public class PhoneNumberUtil
         }
         // Attempt to parse extension first, since it doesn't require region-specific data and we want
         // to have the non-normalised number here.
-//        String extension = maybeStripExtension(nationalNumber);
-//        if (extension.length() > 0)
-//        {
-//            phoneNumber.setExtension(extension);
-//        }
+        //        String extension = maybeStripExtension(nationalNumber);
+        //        if (extension.length() > 0)
+        //        {
+        //            phoneNumber.setExtension(extension);
+        //        }
 
         PhoneMetadata regionMetadata = getMetadataForRegion(defaultRegion);
         // Check to see if the number is given in international format so we know whether this number is
         // from the default region or not.
-        StringBuilder normalizedNationalNumber = new StringBuilder();
         int countryCode = 0;
         try
         {
             // TODO: This method should really just take in the string buffer that has already
             // been created, and just remove the prefix, rather than taking in a string and then
             // outputting a string buffer.
-            countryCode = maybeExtractCountryCode(nationalNumber.toString(), regionMetadata,
-                    normalizedNationalNumber, keepRawInput, phoneNumber);
+            countryCode = maybeExtractCountryCode(nationalNumber, regionMetadata, keepRawInput, phoneNumber);
         }
         catch (NumberParseException e)
         {
@@ -3139,9 +3130,8 @@ public class PhoneNumberUtil
                     matcher.lookingAt())
             {
                 // Strip the plus-char, and try again.
-                countryCode = maybeExtractCountryCode(nationalNumber.substring(matcher.end()),
-                        regionMetadata, normalizedNationalNumber,
-                        keepRawInput, phoneNumber);
+                countryCode = maybeExtractCountryCode(nationalNumber.delete(0, matcher.end()),
+                        regionMetadata, keepRawInput, phoneNumber);
                 if (countryCode == 0)
                 {
                     throw new NumberParseException(NumberParseException.ErrorType.INVALID_COUNTRY_CODE,
@@ -3167,7 +3157,6 @@ public class PhoneNumberUtil
             // If no extracted country calling code, use the region supplied instead. The national number
             // is just the normalized version of the number we were given to parse.
             normalize(nationalNumber);
-            normalizedNationalNumber.append(nationalNumber);
             if (defaultRegion != null)
             {
                 countryCode = regionMetadata.getCountryCode();
@@ -3178,7 +3167,7 @@ public class PhoneNumberUtil
                 phoneNumber.clearCountryCodeSource();
             }
         }
-        if (normalizedNationalNumber.length() < MIN_LENGTH_FOR_NSN)
+        if (nationalNumber.length() < MIN_LENGTH_FOR_NSN)
         {
             throw new NumberParseException(NumberParseException.ErrorType.TOO_SHORT_NSN,
                     "The string supplied is too short to be a phone number.");
@@ -3186,13 +3175,13 @@ public class PhoneNumberUtil
         if (regionMetadata != null)
         {
             StringBuilder carrierCode = new StringBuilder();
-            maybeStripNationalPrefixAndCarrierCode(normalizedNationalNumber, regionMetadata, carrierCode);
+            maybeStripNationalPrefixAndCarrierCode(nationalNumber, regionMetadata, carrierCode);
             if (keepRawInput)
             {
                 phoneNumber.setPreferredDomesticCarrierCode(carrierCode.toString());
             }
         }
-        int lengthOfNationalNumber = normalizedNationalNumber.length();
+        int lengthOfNationalNumber = nationalNumber.length();
         if (lengthOfNationalNumber < MIN_LENGTH_FOR_NSN)
         {
             throw new NumberParseException(NumberParseException.ErrorType.TOO_SHORT_NSN,
@@ -3203,11 +3192,11 @@ public class PhoneNumberUtil
             throw new NumberParseException(NumberParseException.ErrorType.TOO_LONG,
                     "The string supplied is too long to be a phone number.");
         }
-        if (normalizedNationalNumber.charAt(0) == '0')
+        if (nationalNumber.charAt(0) == '0')
         {
             phoneNumber.setItalianLeadingZero(true);
         }
-        phoneNumber.setNationalNumber(Long.parseLong(normalizedNationalNumber.toString()));
+        phoneNumber.setNationalNumber(Long.parseLong(nationalNumber.toString()));
     }
 
     /**
