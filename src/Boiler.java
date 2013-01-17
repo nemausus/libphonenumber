@@ -24,13 +24,17 @@ public class Boiler
         }
 
 
-        long start = System.nanoTime();
-        for (String raw_number : numbers)
+        for (int i = 0; i < 30; ++i)
         {
-            String in = phoneNumberBoiler.getBoiledNumber(raw_number);
-            boiledNumbers.add(in);
+            boiledNumbers.clear();
+            long start = System.nanoTime();
+            for (String raw_number : numbers)
+            {
+                String in = phoneNumberBoiler.getBoiledNumber(raw_number);
+                boiledNumbers.add(in);
+            }
+            System.out.println("time " + (System.nanoTime() - start) / 1000000);
         }
-        System.out.println("time " + (System.nanoTime() - start) / 1000000);
 
 
         for (String phoneNumber : boiledNumbers)
