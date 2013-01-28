@@ -3142,10 +3142,13 @@ public class PhoneNumberUtil
             }
             else
             {
-                c = MY_MAPPINGS[c];
-                if (c != 0)
+                if (c >= 0 && c < 128)
                 {
-                    nationalNumber.append(c);
+                    c = MY_MAPPINGS[c];
+                    if (c != 0)
+                    {
+                        nationalNumber.append(c);
+                    }
                 }
             }
         }
