@@ -23,7 +23,9 @@ import com.google.i18n.phonenumbers.Phonemetadata.PhoneNumberDesc;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber.CountryCodeSource;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,7 +63,7 @@ public class PhoneNumberUtil
     // input from overflowing the regular-expression engine.
     private static final int MAX_INPUT_STRING_LENGTH = 250;
     static final String META_DATA_FILE_PREFIX =
-            "src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto";
+            "/data/PhoneNumberMetadataProto";
     private String currentFilePrefix = META_DATA_FILE_PREFIX;
     private static final Logger LOGGER = Logger.getLogger(PhoneNumberUtil.class.getName());
 
@@ -630,12 +632,13 @@ public class PhoneNumberUtil
         String fileName = filePrefix + "_" +
                 (isNonGeoRegion ? String.valueOf(countryCallingCode) : regionCode);
 
-        InputStream source = null;
-        try
-        {
-            source = new FileInputStream(fileName);
-        }
-        catch (FileNotFoundException e)
+        InputStream source = PhoneNumberUtil.class.getResourceAsStream(fileName);
+        if (source == null)
+        //        try
+        //        {
+        //            source = new FileInputStream(fileName);
+        //        }
+        //        catch (FileNotFoundException e)
         {
             LOGGER.log(Level.SEVERE, "missing metadata: " + fileName);
             throw new RuntimeException("missing metadata: " + fileName);
@@ -1801,9 +1804,9 @@ public class PhoneNumberUtil
     {
         return number.getNationalNumber();
         // If a leading zero has been set, we prefix this now. Note this is not a national prefix.
-//        StringBuilder nationalNumber = new StringBuilder(number.isItalianLeadingZero() ? "0" : "");
-//        nationalNumber.append(number.getNationalNumber());
-//        return nationalNumber.toString();
+        //        StringBuilder nationalNumber = new StringBuilder(number.isItalianLeadingZero() ? "0" : "");
+        //        nationalNumber.append(number.getNationalNumber());
+        //        return nationalNumber.toString();
     }
 
     /**
@@ -2618,7 +2621,7 @@ public class PhoneNumberUtil
         String nationalNumber = number.getNationalNumber();
         do
         {
-            nationalNumber = nationalNumber.substring(0, nationalNumber.length()-1);
+            nationalNumber = nationalNumber.substring(0, nationalNumber.length() - 1);
             numberCopy.setNationalNumber(nationalNumber);
             if (isPossibleNumberWithReason(numberCopy) == ValidationResult.TOO_SHORT ||
                     nationalNumber.length() == 0)
