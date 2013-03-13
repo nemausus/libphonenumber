@@ -1,7 +1,121 @@
 K 25
 svn:wc:ra_dav:version-url
 V 81
-/svn/!svn/ver/550/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data
+/svn/!svn/ver/557/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data
+END
+PhoneNumberMetadataProto_HT
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_HT
+END
+PhoneNumberMetadataProto_HU
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_HU
+END
+PhoneNumberMetadataProto_ID
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/431/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_ID
+END
+PhoneNumberMetadataProto_IE
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/556/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_IE
+END
+PhoneNumberMetadataProto_IL
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/513/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_IL
+END
+PhoneNumberMetadataProto_IM
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_IM
+END
+PhoneNumberMetadataProto_IN
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/556/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_IN
+END
+PhoneNumberMetadataProto_IO
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_IO
+END
+PhoneNumberMetadataProto_IQ
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_IQ
+END
+PhoneNumberMetadataProto_IR
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/557/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_IR
+END
+PhoneNumberMetadataProto_IS
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/556/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_IS
+END
+PhoneNumberMetadataProto_IT
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/516/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_IT
+END
+PhoneNumberMetadataProto_YE
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_YE
+END
+PhoneNumberMetadataProto_YT
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_YT
+END
+PhoneNumberMetadataProto_JE
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_JE
+END
+PhoneNumberMetadataProto_JM
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_JM
+END
+PhoneNumberMetadataProto_JO
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/545/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_JO
+END
+PhoneNumberMetadataProto_JP
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/557/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_JP
+END
+PhoneNumberMetadataProto_ZA
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/550/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_ZA
 END
 PhoneNumberMetadataProto_ZM
 K 25
@@ -19,7 +133,7 @@ PhoneNumberMetadataProto_ZW
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/440/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_ZW
+/svn/!svn/ver/557/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_ZW
 END
 PhoneNumberMetadataProto_KG
 K 25
@@ -31,7 +145,7 @@ PhoneNumberMetadataProto_KH
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/545/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_KH
+/svn/!svn/ver/554/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_KH
 END
 PhoneNumberMetadataProto_KI
 K 25
@@ -61,31 +175,13 @@ PhoneNumberMetadataProto_KR
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/511/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_KR
-END
-PhoneNumberMetadataProto_870
-K 25
-svn:wc:ra_dav:version-url
-V 110
-/svn/!svn/ver/448/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_870
-END
-PhoneNumberAlternateFormatsProto_43
-K 25
-svn:wc:ra_dav:version-url
-V 117
-/svn/!svn/ver/515/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberAlternateFormatsProto_43
+/svn/!svn/ver/557/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_KR
 END
 PhoneNumberMetadataProto_KW
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/550/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_KW
-END
-PhoneNumberAlternateFormatsProto_44
-K 25
-svn:wc:ra_dav:version-url
-V 117
-/svn/!svn/ver/486/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberAlternateFormatsProto_44
+/svn/!svn/ver/557/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_KW
 END
 PhoneNumberMetadataProto_KY
 K 25
@@ -98,18 +194,6 @@ K 25
 svn:wc:ra_dav:version-url
 V 109
 /svn/!svn/ver/513/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_KZ
-END
-PhoneNumberMetadataProto_878
-K 25
-svn:wc:ra_dav:version-url
-V 110
-/svn/!svn/ver/454/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_878
-END
-PhoneNumberAlternateFormatsProto_49
-K 25
-svn:wc:ra_dav:version-url
-V 117
-/svn/!svn/ver/486/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberAlternateFormatsProto_49
 END
 PhoneNumberMetadataProto_LA
 K 25
@@ -133,7 +217,7 @@ PhoneNumberMetadataProto_LI
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/526/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_LI
+/svn/!svn/ver/556/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_LI
 END
 PhoneNumberMetadataProto_LK
 K 25
@@ -145,7 +229,13 @@ PhoneNumberMetadataProto_LR
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/466/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_LR
+/svn/!svn/ver/557/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_LR
+END
+PhoneNumberMetadataProto_870
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/448/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_870
 END
 PhoneNumberMetadataProto_LS
 K 25
@@ -159,23 +249,11 @@ svn:wc:ra_dav:version-url
 V 109
 /svn/!svn/ver/545/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_LT
 END
-PhoneNumberMetadataProto_881
-K 25
-svn:wc:ra_dav:version-url
-V 110
-/svn/!svn/ver/463/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_881
-END
 PhoneNumberMetadataProto_LU
 K 25
 svn:wc:ra_dav:version-url
 V 109
 /svn/!svn/ver/431/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_LU
-END
-PhoneNumberMetadataProto_882
-K 25
-svn:wc:ra_dav:version-url
-V 110
-/svn/!svn/ver/489/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_882
 END
 PhoneNumberMetadataProto_LV
 K 25
@@ -183,35 +261,23 @@ svn:wc:ra_dav:version-url
 V 109
 /svn/!svn/ver/426/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_LV
 END
-PhoneNumberMetadataProto_883
-K 25
-svn:wc:ra_dav:version-url
-V 110
-/svn/!svn/ver/415/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_883
-END
-PhoneNumberAlternateFormatsProto_55
-K 25
-svn:wc:ra_dav:version-url
-V 117
-/svn/!svn/ver/486/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberAlternateFormatsProto_55
-END
 PhoneNumberMetadataProto_LY
 K 25
 svn:wc:ra_dav:version-url
 V 109
 /svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_LY
 END
-PhoneNumberMetadataProto_888
+PhoneNumberMetadataProto_878
 K 25
 svn:wc:ra_dav:version-url
 V 110
-/svn/!svn/ver/526/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_888
+/svn/!svn/ver/454/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_878
 END
 PhoneNumberMetadataProto_MA
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/550/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_MA
+/svn/!svn/ver/556/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_MA
 END
 PhoneNumberMetadataProto_MC
 K 25
@@ -303,23 +369,35 @@ svn:wc:ra_dav:version-url
 V 109
 /svn/!svn/ver/440/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_MS
 END
+PhoneNumberMetadataProto_881
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/463/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_881
+END
 PhoneNumberMetadataProto_MT
 K 25
 svn:wc:ra_dav:version-url
 V 109
 /svn/!svn/ver/513/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_MT
 END
-PhoneNumberAlternateFormatsProto_61
+PhoneNumberMetadataProto_882
 K 25
 svn:wc:ra_dav:version-url
-V 117
-/svn/!svn/ver/486/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberAlternateFormatsProto_61
+V 110
+/svn/!svn/ver/489/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_882
 END
 PhoneNumberMetadataProto_MU
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/545/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_MU
+/svn/!svn/ver/556/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_MU
+END
+PhoneNumberMetadataProto_883
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/415/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_883
 END
 PhoneNumberMetadataProto_MV
 K 25
@@ -343,7 +421,7 @@ PhoneNumberMetadataProto_MY
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/513/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_MY
+/svn/!svn/ver/554/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_MY
 END
 PhoneNumberMetadataProto_MZ
 K 25
@@ -351,11 +429,11 @@ svn:wc:ra_dav:version-url
 V 109
 /svn/!svn/ver/415/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_MZ
 END
-PhoneNumberMetadataProto_979
+PhoneNumberMetadataProto_888
 K 25
 svn:wc:ra_dav:version-url
 V 110
-/svn/!svn/ver/526/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_979
+/svn/!svn/ver/526/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_888
 END
 PhoneNumberMetadataProto_NA
 K 25
@@ -427,7 +505,13 @@ PhoneNumberMetadataProto_NZ
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/431/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_NZ
+/svn/!svn/ver/557/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_NZ
+END
+PhoneNumberMetadataProto_979
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/526/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_979
 END
 PhoneNumberMetadataProto_OM
 K 25
@@ -435,17 +519,11 @@ svn:wc:ra_dav:version-url
 V 109
 /svn/!svn/ver/532/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_OM
 END
-PhoneNumberAlternateFormatsProto_81
-K 25
-svn:wc:ra_dav:version-url
-V 117
-/svn/!svn/ver/486/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberAlternateFormatsProto_81
-END
 PhoneNumberMetadataProto_PA
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/466/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_PA
+/svn/!svn/ver/554/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_PA
 END
 PhoneNumberMetadataProto_PE
 K 25
@@ -511,7 +589,7 @@ PhoneNumberMetadataProto_PT
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_PT
+/svn/!svn/ver/556/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_PT
 END
 PhoneNumberMetadataProto_AD
 K 25
@@ -637,19 +715,19 @@ PhoneNumberMetadataProto_BD
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_BD
+/svn/!svn/ver/556/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_BD
 END
 PhoneNumberMetadataProto_BE
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/550/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_BE
+/svn/!svn/ver/556/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_BE
 END
 PhoneNumberMetadataProto_BF
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/545/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_BF
+/svn/!svn/ver/557/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_BF
 END
 PhoneNumberMetadataProto_BG
 K 25
@@ -739,7 +817,7 @@ PhoneNumberMetadataProto_BY
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/431/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_BY
+/svn/!svn/ver/556/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_BY
 END
 PhoneNumberMetadataProto_BZ
 K 25
@@ -757,7 +835,7 @@ PhoneNumberMetadataProto_CA
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/448/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_CA
+/svn/!svn/ver/556/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_CA
 END
 PhoneNumberMetadataProto_RS
 K 25
@@ -781,7 +859,7 @@ PhoneNumberMetadataProto_CD
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/440/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_CD
+/svn/!svn/ver/557/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_CD
 END
 PhoneNumberMetadataProto_RW
 K 25
@@ -835,7 +913,7 @@ PhoneNumberMetadataProto_CN
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/550/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_CN
+/svn/!svn/ver/557/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_CN
 END
 PhoneNumberMetadataProto_CO
 K 25
@@ -883,7 +961,7 @@ PhoneNumberMetadataProto_SE
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/431/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_SE
+/svn/!svn/ver/556/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_SE
 END
 PhoneNumberMetadataProto_CV
 K 25
@@ -901,7 +979,7 @@ PhoneNumberMetadataProto_SG
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/466/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_SG
+/svn/!svn/ver/556/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_SG
 END
 PhoneNumberMetadataProto_SH
 K 25
@@ -937,7 +1015,7 @@ PhoneNumberMetadataProto_CZ
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/468/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_CZ
+/svn/!svn/ver/557/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_CZ
 END
 PhoneNumberMetadataProto_SK
 K 25
@@ -963,11 +1041,23 @@ svn:wc:ra_dav:version-url
 V 109
 /svn/!svn/ver/513/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_SN
 END
+PhoneNumberAlternateFormatsProto_43
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/!svn/ver/515/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberAlternateFormatsProto_43
+END
 PhoneNumberMetadataProto_SO
 K 25
 svn:wc:ra_dav:version-url
 V 109
 /svn/!svn/ver/440/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_SO
+END
+PhoneNumberAlternateFormatsProto_44
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/!svn/ver/486/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberAlternateFormatsProto_44
 END
 PhoneNumberMetadataProto_SR
 K 25
@@ -986,6 +1076,12 @@ K 25
 svn:wc:ra_dav:version-url
 V 109
 /svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_ST
+END
+PhoneNumberAlternateFormatsProto_49
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/!svn/ver/486/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberAlternateFormatsProto_49
 END
 PhoneNumberMetadataProto_DE
 K 25
@@ -1027,7 +1123,7 @@ PhoneNumberMetadataProto_DK
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/466/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_DK
+/svn/!svn/ver/554/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_DK
 END
 PhoneNumberMetadataProto_DM
 K 25
@@ -1052,12 +1148,6 @@ K 25
 svn:wc:ra_dav:version-url
 V 109
 /svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_TD
-END
-PhoneNumberMetadataProto_800
-K 25
-svn:wc:ra_dav:version-url
-V 110
-/svn/!svn/ver/526/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_800
 END
 PhoneNumberMetadataProto_TG
 K 25
@@ -1093,13 +1183,7 @@ PhoneNumberMetadataProto_TL
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/513/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_TL
-END
-PhoneNumberMetadataProto_808
-K 25
-svn:wc:ra_dav:version-url
-V 110
-/svn/!svn/ver/526/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_808
+/svn/!svn/ver/556/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_TL
 END
 PhoneNumberMetadataProto_TM
 K 25
@@ -1119,6 +1203,12 @@ svn:wc:ra_dav:version-url
 V 109
 /svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_TO
 END
+PhoneNumberAlternateFormatsProto_55
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/!svn/ver/486/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberAlternateFormatsProto_55
+END
 PhoneNumberMetadataProto_TR
 K 25
 svn:wc:ra_dav:version-url
@@ -1135,7 +1225,7 @@ PhoneNumberMetadataProto_TT
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_TT
+/svn/!svn/ver/557/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_TT
 END
 PhoneNumberMetadataProto_EE
 K 25
@@ -1165,7 +1255,7 @@ PhoneNumberMetadataProto_EH
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/550/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_EH
+/svn/!svn/ver/556/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_EH
 END
 PhoneNumberMetadataProto_TZ
 K 25
@@ -1185,6 +1275,12 @@ svn:wc:ra_dav:version-url
 V 109
 /svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_ER
 END
+PhoneNumberMetadataProto_800
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/526/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_800
+END
 PhoneNumberMetadataProto_ES
 K 25
 svn:wc:ra_dav:version-url
@@ -1201,7 +1297,19 @@ PhoneNumberMetadataProto_UG
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/415/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_UG
+/svn/!svn/ver/557/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_UG
+END
+PhoneNumberMetadataProto_808
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/526/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_808
+END
+PhoneNumberAlternateFormatsProto_61
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/!svn/ver/486/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberAlternateFormatsProto_61
 END
 PhoneNumberMetadataProto_US
 K 25
@@ -1363,7 +1471,7 @@ PhoneNumberMetadataProto_GN
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/440/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_GN
+/svn/!svn/ver/557/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_GN
 END
 PhoneNumberMetadataProto_GP
 K 25
@@ -1381,7 +1489,7 @@ PhoneNumberMetadataProto_GR
 K 25
 svn:wc:ra_dav:version-url
 V 109
-/svn/!svn/ver/532/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_GR
+/svn/!svn/ver/556/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_GR
 END
 PhoneNumberMetadataProto_GT
 K 25
@@ -1413,6 +1521,12 @@ svn:wc:ra_dav:version-url
 V 109
 /svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_GY
 END
+PhoneNumberAlternateFormatsProto_81
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/!svn/ver/486/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberAlternateFormatsProto_81
+END
 PhoneNumberMetadataProto_WS
 K 25
 svn:wc:ra_dav:version-url
@@ -1436,118 +1550,4 @@ K 25
 svn:wc:ra_dav:version-url
 V 109
 /svn/!svn/ver/532/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_HR
-END
-PhoneNumberMetadataProto_HT
-K 25
-svn:wc:ra_dav:version-url
-V 109
-/svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_HT
-END
-PhoneNumberMetadataProto_HU
-K 25
-svn:wc:ra_dav:version-url
-V 109
-/svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_HU
-END
-PhoneNumberMetadataProto_ID
-K 25
-svn:wc:ra_dav:version-url
-V 109
-/svn/!svn/ver/431/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_ID
-END
-PhoneNumberMetadataProto_IE
-K 25
-svn:wc:ra_dav:version-url
-V 109
-/svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_IE
-END
-PhoneNumberMetadataProto_IL
-K 25
-svn:wc:ra_dav:version-url
-V 109
-/svn/!svn/ver/513/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_IL
-END
-PhoneNumberMetadataProto_IM
-K 25
-svn:wc:ra_dav:version-url
-V 109
-/svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_IM
-END
-PhoneNumberMetadataProto_IN
-K 25
-svn:wc:ra_dav:version-url
-V 109
-/svn/!svn/ver/548/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_IN
-END
-PhoneNumberMetadataProto_IO
-K 25
-svn:wc:ra_dav:version-url
-V 109
-/svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_IO
-END
-PhoneNumberMetadataProto_IQ
-K 25
-svn:wc:ra_dav:version-url
-V 109
-/svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_IQ
-END
-PhoneNumberMetadataProto_IR
-K 25
-svn:wc:ra_dav:version-url
-V 109
-/svn/!svn/ver/448/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_IR
-END
-PhoneNumberMetadataProto_IS
-K 25
-svn:wc:ra_dav:version-url
-V 109
-/svn/!svn/ver/466/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_IS
-END
-PhoneNumberMetadataProto_IT
-K 25
-svn:wc:ra_dav:version-url
-V 109
-/svn/!svn/ver/516/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_IT
-END
-PhoneNumberMetadataProto_YE
-K 25
-svn:wc:ra_dav:version-url
-V 109
-/svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_YE
-END
-PhoneNumberMetadataProto_YT
-K 25
-svn:wc:ra_dav:version-url
-V 109
-/svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_YT
-END
-PhoneNumberMetadataProto_JE
-K 25
-svn:wc:ra_dav:version-url
-V 109
-/svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_JE
-END
-PhoneNumberMetadataProto_JM
-K 25
-svn:wc:ra_dav:version-url
-V 109
-/svn/!svn/ver/411/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_JM
-END
-PhoneNumberMetadataProto_JO
-K 25
-svn:wc:ra_dav:version-url
-V 109
-/svn/!svn/ver/545/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_JO
-END
-PhoneNumberMetadataProto_JP
-K 25
-svn:wc:ra_dav:version-url
-V 109
-/svn/!svn/ver/516/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_JP
-END
-PhoneNumberMetadataProto_ZA
-K 25
-svn:wc:ra_dav:version-url
-V 109
-/svn/!svn/ver/550/trunk/java/libphonenumber/src/com/google/i18n/phonenumbers/data/PhoneNumberMetadataProto_ZA
 END
