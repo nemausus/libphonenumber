@@ -629,12 +629,14 @@ public class PhoneNumberUtil
         boolean isNonGeoRegion = REGION_CODE_FOR_NON_GEO_ENTITY.equals(regionCode);
         String fileName = filePrefix + "_" +
                 (isNonGeoRegion ? String.valueOf(countryCallingCode) : regionCode);
+
         InputStream source = PhoneNumberUtil.class.getResourceAsStream(fileName);
         if (source == null)
         {
             LOGGER.log(Level.SEVERE, "missing metadata: " + fileName);
             throw new RuntimeException("missing metadata: " + fileName);
         }
+
         ObjectInputStream in = null;
         try
         {
