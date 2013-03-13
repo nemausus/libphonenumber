@@ -55,6 +55,7 @@ public class PhoneNumberUtil
     static final int REGEX_FLAGS = Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE;
     // The minimum and maximum length of the national significant number.
     private static final int MIN_LENGTH_FOR_NSN = 2;
+    private static final int MIN_LENGTH_FOR_NSN_INDIA_AND_USA = 7;
     // The ITU says the maximum length should be 15, but we have found longer numbers in Germany.
     static final int MAX_LENGTH_FOR_NSN = 16;
     // The maximum length of the country calling code.
@@ -3504,9 +3505,8 @@ public class PhoneNumberUtil
         return !isNumberMatchingDesc(nationalSignificantNumber, metadata.getNoInternationalDialling());
     }
 
-    public static String extractPlusAndDigits(String number)
+    private static void extractDigits(String number, StringBuilder digits)
     {
-        StringBuilder digits = new StringBuilder();
         for (int i = 0; i < number.length(); ++i)
         {
             char c = number.charAt(i);
@@ -3526,6 +3526,212 @@ public class PhoneNumberUtil
                 }
             }
         }
+    }
+
+    public String extractDigits(String number)
+    {
+        StringBuilder digits = new StringBuilder();
+        extractDigits(number, digits);
         return digits.toString();
+    }
+
+    public PhoneNumber fastParse(String numberToParse, String defaultRegion) throws NumberParseException
+    {
+        if (numberToParse == null || numberToParse.length() < MIN_LENGTH_FOR_NSN_INDIA_AND_USA || numberToParse.length() > MAX_INPUT_STRING_LENGTH)
+        {
+            return null;
+        }
+
+        StringBuilder nationalNumber = new StringBuilder();
+        extractDigits(numberToParse, nationalNumber);
+
+        if (nationalNumber.length() < MIN_LENGTH_FOR_NSN_INDIA_AND_USA || nationalNumber.lastIndexOf("+") > 0)
+        {
+            return null;
+        }
+
+        int countryCode = 0;
+        if (!isValidRegionCode(defaultRegion) && nationalNumber.charAt(0) != PLUS_SIGN)
+        {
+            return null;
+        }
+
+        PhoneMetadata regionMetadata = getMetadataForRegion(defaultRegion);
+        PhoneNumber phoneNumber = new PhoneNumber();
+        try
+        {
+            countryCode = fastMaybeExtractCountryCode(nationalNumber, regionMetadata, phoneNumber);
+        }
+        catch (NumberParseException e)
+        {
+            if (e.getErrorType() == NumberParseException.ErrorType.INVALID_COUNTRY_CODE)
+            {
+                if (nationalNumber.charAt(0) == PLUS_SIGN)
+                {
+                    countryCode = fastMaybeExtractCountryCode(nationalNumber.deleteCharAt(0),
+                            regionMetadata, phoneNumber);
+                    if (countryCode == 0)
+                    {
+                        throw new NumberParseException(NumberParseException.ErrorType.INVALID_COUNTRY_CODE,
+                                "Could not interpret numbers after plus-sign.");
+                    }
+                }
+            }
+            else
+            {
+                throw new NumberParseException(e.getErrorType(), e.getMessage());
+            }
+        }
+
+        if (countryCode != 0)
+        {
+            String phoneNumberRegion = getRegionCodeForCountryCode(countryCode);
+            if (!phoneNumberRegion.equals(defaultRegion))
+            {
+                regionMetadata = getMetadataForRegionOrCallingCode(countryCode, phoneNumberRegion);
+            }
+        }
+        else
+        {
+            if (defaultRegion != null)
+            {
+                countryCode = regionMetadata.getCountryCode();
+                phoneNumber.setCountryCode(countryCode);
+            }
+        }
+        if (nationalNumber.length() < MIN_LENGTH_FOR_NSN_INDIA_AND_USA)
+        {
+            throw new NumberParseException(NumberParseException.ErrorType.TOO_SHORT_NSN,
+                    "The string supplied is too short to be a phone number.");
+        }
+        if (regionMetadata != null)
+        {
+            StringBuilder carrierCode = new StringBuilder();
+            maybeStripNationalPrefixAndCarrierCode(nationalNumber, regionMetadata, carrierCode);
+        }
+        int lengthOfNationalNumber = nationalNumber.length();
+        if (lengthOfNationalNumber < MIN_LENGTH_FOR_NSN_INDIA_AND_USA)
+        {
+            throw new NumberParseException(NumberParseException.ErrorType.TOO_SHORT_NSN,
+                    "The string supplied is too short to be a phone number.");
+        }
+        if (lengthOfNationalNumber > MAX_LENGTH_FOR_NSN)
+        {
+            throw new NumberParseException(NumberParseException.ErrorType.TOO_LONG,
+                    "The string supplied is too long to be a phone number.");
+        }
+        if (nationalNumber.charAt(0) == '0')
+        {
+            phoneNumber.setItalianLeadingZero(true);
+        }
+        phoneNumber.setNationalNumber(Long.parseLong(nationalNumber.toString()));
+
+        return phoneNumber;
+    }
+
+    private int fastMaybeExtractCountryCode(StringBuilder nationalNumber, PhoneMetadata defaultRegionMetadata,
+                                            PhoneNumber phoneNumber) throws NumberParseException
+    {
+        String possibleCountryIddPrefix = "NonMatch";
+        if (defaultRegionMetadata != null)
+        {
+            possibleCountryIddPrefix = defaultRegionMetadata.getInternationalPrefix();
+        }
+
+        CountryCodeSource countryCodeSource =
+                fastMaybeStripInternationalPrefixAndNormalize(nationalNumber, possibleCountryIddPrefix);
+
+        if (countryCodeSource != CountryCodeSource.FROM_DEFAULT_COUNTRY)
+        {
+            if (nationalNumber.length() < MIN_LENGTH_FOR_NSN_INDIA_AND_USA)
+            {
+                throw new NumberParseException(NumberParseException.ErrorType.TOO_SHORT_AFTER_IDD,
+                        "Phone number had an IDD, but after this was not " +
+                                " long enough to be a viable phone number");
+            }
+
+            int potentialCountryCode = fastExtractCountryCode(nationalNumber);
+            if (potentialCountryCode != 0)
+            {
+                phoneNumber.setCountryCode(potentialCountryCode);
+                return potentialCountryCode;
+            }
+
+            throw new NumberParseException(NumberParseException.ErrorType.INVALID_COUNTRY_CODE,
+                    "Country calling code supplied was not recognised.");
+        }
+        else if (defaultRegionMetadata != null)
+        {
+            int defaultCountryCode = defaultRegionMetadata.getCountryCode();
+            String defaultCountryCodeString = String.valueOf(defaultCountryCode);
+            String fullNumber = nationalNumber.toString();
+            if (fullNumber.startsWith(defaultCountryCodeString))
+            {
+                nationalNumber.delete(0, defaultCountryCodeString.length());
+
+                PhoneNumberDesc generalDesc = defaultRegionMetadata.getGeneralDesc();
+                Pattern validNumberPattern =
+                        regexCache.getPatternForRegex(generalDesc.getNationalNumberPattern());
+                maybeStripNationalPrefixAndCarrierCode(
+                        nationalNumber, defaultRegionMetadata, null /* Don't need the carrier code */);
+                Pattern possibleNumberPattern =
+                        regexCache.getPatternForRegex(generalDesc.getPossibleNumberPattern());
+
+                if ((!validNumberPattern.matcher(fullNumber).matches() &&
+                        validNumberPattern.matcher(nationalNumber).matches()) ||
+                        testNumberLengthAgainstPattern(possibleNumberPattern, fullNumber)
+                                == ValidationResult.TOO_LONG)
+                {
+                    phoneNumber.setCountryCode(defaultCountryCode);
+                    return defaultCountryCode;
+                }
+                else
+                {
+                    nationalNumber.replace(0, nationalNumber.length(), fullNumber);
+                }
+            }
+        }
+        phoneNumber.setCountryCode(0);
+        return 0;
+    }
+
+    private int fastExtractCountryCode(StringBuilder nationalNumber)
+    {
+        if ((nationalNumber.length() == 0) || (nationalNumber.charAt(0) == '0'))
+        {
+            return 0;
+        }
+        int potentialCountryCode;
+        int numberLength = nationalNumber.length();
+        for (int i = 1; i <= MAX_LENGTH_COUNTRY_CODE && i <= numberLength; i++)
+        {
+            potentialCountryCode = Integer.parseInt(nationalNumber.substring(0, i));
+            if (countryCallingCodeToRegionCodeMap.containsKey(potentialCountryCode))
+            {
+                nationalNumber.delete(0, i);
+                return potentialCountryCode;
+            }
+        }
+        return 0;
+    }
+
+    private CountryCodeSource fastMaybeStripInternationalPrefixAndNormalize(StringBuilder number, String possibleIddPrefix)
+    {
+        if (number.length() == 0)
+        {
+            return CountryCodeSource.FROM_DEFAULT_COUNTRY;
+        }
+
+        if (number.charAt(0) == PLUS_SIGN)
+        {
+            number.deleteCharAt(0);
+            // Can now normalize the rest of the number since we've consumed the "+" sign at the start.
+            return CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN;
+        }
+        // Attempt to parse the first digits as an international prefix.
+        Pattern iddPattern = regexCache.getPatternForRegex(possibleIddPrefix);
+        return parsePrefixAsIdd(iddPattern, number)
+                ? CountryCodeSource.FROM_NUMBER_WITH_IDD
+                : CountryCodeSource.FROM_DEFAULT_COUNTRY;
     }
 }
