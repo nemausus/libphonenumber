@@ -96,7 +96,7 @@ public class PhoneNumberUtilsTests
     {
         try
         {
-            Phonenumber.PhoneNumber phoneNumber = phoneNumberUtil.fastParse(number, "IN");
+            Phonenumber.PhoneNumber phoneNumber = phoneNumberUtil.fastParse(phoneNumberUtil.extractDigits(number), "IN");
             if (phoneNumber != null)
             {
                 return "+" + phoneNumber.getCountryCode() + "-" + phoneNumber.getNationalNumber();

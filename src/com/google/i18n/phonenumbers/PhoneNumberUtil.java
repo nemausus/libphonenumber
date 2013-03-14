@@ -3544,8 +3544,7 @@ public class PhoneNumberUtil
             return null;
         }
 
-        StringBuilder nationalNumber = new StringBuilder();
-        extractDigits(numberToParse, nationalNumber);
+        StringBuilder nationalNumber = new StringBuilder(numberToParse);
 
         if (nationalNumber.length() < MIN_LENGTH_FOR_NSN_INDIA_AND_USA || nationalNumber.lastIndexOf("+") > 0)
         {
