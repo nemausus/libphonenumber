@@ -117,7 +117,6 @@ public class PhoneNumberUtil
     private static final Map<Character, Character> ALL_PLUS_NUMBER_GROUPING_SYMBOLS;
 
     //A array that contains mapping for digits, alpha characters (upper and lower) and plus char
-    private static final char[] MY_MAPPINGS = new char[128];
 
     static
     {
@@ -202,17 +201,6 @@ public class PhoneNumberUtil
         allPlusNumberGroupings.put('\uFF0E', '.');
         ALL_PLUS_NUMBER_GROUPING_SYMBOLS = Collections.unmodifiableMap(allPlusNumberGroupings);
 
-        for (char i = '0'; i <= '9'; ++i)
-        {
-            MY_MAPPINGS[i] = i;
-        }
-
-        for (char i = 'a'; i <= 'z'; ++i)
-        {
-            char upperChar = Character.toUpperCase(i);
-            MY_MAPPINGS[i] = alphaMap.get(upperChar);
-            MY_MAPPINGS[upperChar] = alphaMap.get(upperChar);
-        }
     }
 
     // Pattern that makes it easy to distinguish whether a region has a unique international dialing
@@ -3523,13 +3511,13 @@ public class PhoneNumberUtil
             }
             else
             {
-                if (c >= 0 && c < 128)
+                if (Character.isDigit(c))
                 {
-                    c = MY_MAPPINGS[c];
-                    if (c != 0)
-                    {
-                        digits.append(c);
-                    }
+                    digits.append(c);
+                }
+                else if (Character.isLetter(c))
+                {
+                    break;
                 }
             }
         }

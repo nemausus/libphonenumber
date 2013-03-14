@@ -30,13 +30,13 @@ public class PhoneNumberUtilsTests
                 if (!expected.equals(actual))
                 {
                     diffCount++;
-                    System.out.println("expected:" + expected + "\n" + "actual:" + actual);
+                    System.out.println("input:" + number + "\t" + "expected:" + expected + "\t" + "actual:" + actual);
                 }
             }
             else if (expected != null || actual != null)
             {
                 diffCount++;
-                System.out.println("expected:" + expected + "\n" + "actual:" + actual);
+                System.out.println("input:" + number + "\t" + "expected:" + expected + "\t" + "actual:" + actual);
             }
             number = bufferedReader.readLine();
         }
