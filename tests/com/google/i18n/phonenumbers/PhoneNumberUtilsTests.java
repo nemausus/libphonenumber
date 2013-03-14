@@ -87,7 +87,6 @@ public class PhoneNumberUtilsTests
         }
         catch (NumberParseException e)
         {
-            return null;
         }
         return null;
     }
@@ -96,15 +95,10 @@ public class PhoneNumberUtilsTests
     {
         try
         {
-            Phonenumber.PhoneNumber phoneNumber = phoneNumberUtil.fastParse(phoneNumberUtil.extractDigits(number), "IN");
-            if (phoneNumber != null)
-            {
-                return "+" + phoneNumber.getCountryCode() + "-" + phoneNumber.getNationalNumber();
-            }
+            return phoneNumberUtil.fastParse(phoneNumberUtil.extractDigits(number), "IN");
         }
         catch (NumberParseException e)
         {
-            return null;
         }
         return null;
     }
