@@ -64,7 +64,7 @@ public class PhoneNumberUtil
     // input from overflowing the regular-expression engine.
     private static final int MAX_INPUT_STRING_LENGTH = 250;
     static final String META_DATA_FILE_PREFIX =
-            "   `/data/PhoneNumberMetadataProto";
+            "/data/PhoneNumberMetadataProto";
     private String currentFilePrefix = META_DATA_FILE_PREFIX;
     private static final Logger LOGGER = Logger.getLogger(PhoneNumberUtil.class.getName());
 
