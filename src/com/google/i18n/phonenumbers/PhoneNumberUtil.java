@@ -3525,7 +3525,7 @@ public class PhoneNumberUtil
         return digits.toString();
     }
 
-    public PhoneNumber fastParse(String numberToParse, String defaultRegion) throws NumberParseException
+    public String fastParse(String numberToParse, String defaultRegion) throws NumberParseException
     {
         if (numberToParse == null || numberToParse.length() < MIN_LENGTH_FOR_NSN_INDIA_AND_USA || numberToParse.length() > MAX_INPUT_STRING_LENGTH)
         {
@@ -3546,10 +3546,9 @@ public class PhoneNumberUtil
         }
 
         PhoneMetadata regionMetadata = getMetadataForRegion(defaultRegion);
-        PhoneNumber phoneNumber = new PhoneNumber();
         try
         {
-            countryCode = fastMaybeExtractCountryCode(nationalNumber, regionMetadata, phoneNumber);
+            countryCode = fastMaybeExtractCountryCode(nationalNumber, regionMetadata);
         }
         catch (NumberParseException e)
         {
@@ -3558,7 +3557,7 @@ public class PhoneNumberUtil
                 if (nationalNumber.charAt(0) == PLUS_SIGN)
                 {
                     countryCode = fastMaybeExtractCountryCode(nationalNumber.deleteCharAt(0),
-                            regionMetadata, phoneNumber);
+                            regionMetadata);
                     if (countryCode == 0)
                     {
                         throw new NumberParseException(NumberParseException.ErrorType.INVALID_COUNTRY_CODE,
@@ -3585,7 +3584,6 @@ public class PhoneNumberUtil
             if (defaultRegion != null)
             {
                 countryCode = regionMetadata.getCountryCode();
-                phoneNumber.setCountryCode(countryCode);
             }
         }
         if (nationalNumber.length() < MIN_LENGTH_FOR_NSN_INDIA_AND_USA)
@@ -3609,17 +3607,13 @@ public class PhoneNumberUtil
             throw new NumberParseException(NumberParseException.ErrorType.TOO_LONG,
                     "The string supplied is too long to be a phone number.");
         }
-        if (nationalNumber.charAt(0) == '0')
-        {
-            phoneNumber.setItalianLeadingZero(true);
-        }
-        phoneNumber.setNationalNumber(Long.parseLong(nationalNumber.toString()));
 
-        return phoneNumber;
+        nationalNumber.insert(0, "+" + countryCode + "-");
+        return nationalNumber.toString();
     }
 
-    private int fastMaybeExtractCountryCode(StringBuilder nationalNumber, PhoneMetadata defaultRegionMetadata,
-                                            PhoneNumber phoneNumber) throws NumberParseException
+    private int fastMaybeExtractCountryCode(StringBuilder nationalNumber, PhoneMetadata defaultRegionMetadata)
+            throws NumberParseException
     {
         String possibleCountryIddPrefix = "NonMatch";
         if (defaultRegionMetadata != null)
@@ -3642,7 +3636,6 @@ public class PhoneNumberUtil
             int potentialCountryCode = fastExtractCountryCode(nationalNumber);
             if (potentialCountryCode != 0)
             {
-                phoneNumber.setCountryCode(potentialCountryCode);
                 return potentialCountryCode;
             }
 
@@ -3671,7 +3664,6 @@ public class PhoneNumberUtil
                         testNumberLengthAgainstPattern(possibleNumberPattern, fullNumber)
                                 == ValidationResult.TOO_LONG)
                 {
-                    phoneNumber.setCountryCode(defaultCountryCode);
                     return defaultCountryCode;
                 }
                 else
@@ -3680,7 +3672,6 @@ public class PhoneNumberUtil
                 }
             }
         }
-        phoneNumber.setCountryCode(0);
         return 0;
     }
 
