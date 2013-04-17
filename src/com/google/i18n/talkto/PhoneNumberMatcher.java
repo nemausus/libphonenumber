@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-package com.google.i18n.phonenumbers;
+package com.google.i18n.talkto;
 
-import com.google.i18n.phonenumbers.PhoneNumberUtil.Leniency;
-import com.google.i18n.phonenumbers.PhoneNumberUtil.MatchType;
-import com.google.i18n.phonenumbers.PhoneNumberUtil.PhoneNumberFormat;
-import com.google.i18n.phonenumbers.Phonemetadata.NumberFormat;
-import com.google.i18n.phonenumbers.Phonemetadata.PhoneMetadata;
-import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber.CountryCodeSource;
-import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
+import com.google.i18n.talkto.Phonemetadata.NumberFormat;
+import com.google.i18n.talkto.Phonemetadata.PhoneMetadata;
+import com.google.i18n.talkto.Phonenumber.PhoneNumber.CountryCodeSource;
+import com.google.i18n.talkto.Phonenumber.PhoneNumber;
 
 import java.lang.Character.UnicodeBlock;
 import java.util.Iterator;
@@ -177,7 +174,7 @@ final class PhoneNumberMatcher implements Iterator<PhoneNumberMatch> {
    */
   private final String preferredRegion;
   /** The degree of validation requested. */
-  private final Leniency leniency;
+  private final PhoneNumberUtil.Leniency leniency;
   /** The maximum number of retries after matching an invalid number. */
   private long maxTries;
 
@@ -203,7 +200,7 @@ final class PhoneNumberMatcher implements Iterator<PhoneNumberMatch> {
    *                  This is to cover degenerate cases where the text has a lot of false positives
    *                  in it. Must be {@code >= 0}.
    */
-  PhoneNumberMatcher(PhoneNumberUtil util, CharSequence text, String country, Leniency leniency,
+  PhoneNumberMatcher(PhoneNumberUtil util, CharSequence text, String country, PhoneNumberUtil.Leniency leniency,
       long maxTries) {
 
     if ((util == null) || (leniency == null)) {
@@ -396,7 +393,7 @@ final class PhoneNumberMatcher implements Iterator<PhoneNumberMatch> {
 
       // If leniency is set to VALID or stricter, we also want to skip numbers that are surrounded
       // by Latin alphabetic characters, to skip cases like abc8005001234 or 8005001234def.
-      if (leniency.compareTo(Leniency.VALID) >= 0) {
+      if (leniency.compareTo(PhoneNumberUtil.Leniency.VALID) >= 0) {
         // If the candidate is not at the start of the text, and does not start with phone-number
         // punctuation, check the previous character.
         if (offset > 0 && !LEAD_CLASS.matcher(candidate).lookingAt()) {
@@ -526,7 +523,7 @@ final class PhoneNumberMatcher implements Iterator<PhoneNumberMatch> {
                                                   NumberFormat formattingPattern) {
     if (formattingPattern == null) {
       // This will be in the format +CC-DG;ext=EXT where DG represents groups of digits.
-      String rfc3966Format = util.format(number, PhoneNumberFormat.RFC3966);
+      String rfc3966Format = util.format(number, PhoneNumberUtil.PhoneNumberFormat.RFC3966);
       // We remove the extension part from the formatted string before splitting it into different
       // groups.
       int endIndex = rfc3966Format.indexOf(';');
@@ -540,7 +537,7 @@ final class PhoneNumberMatcher implements Iterator<PhoneNumberMatch> {
       // We format the NSN only, and split that according to the separator.
       String nationalSignificantNumber = util.getNationalSignificantNumber(number);
       return util.formatNsnUsingPattern(nationalSignificantNumber,
-                                        formattingPattern, PhoneNumberFormat.RFC3966).split("-");
+                                        formattingPattern, PhoneNumberUtil.PhoneNumberFormat.RFC3966).split("-");
     }
   }
 
@@ -588,7 +585,7 @@ final class PhoneNumberMatcher implements Iterator<PhoneNumberMatch> {
           // This is the carrier code case, in which the 'X's always precede the national
           // significant number.
           index++;
-          if (util.isNumberMatch(number, candidate.substring(index)) != MatchType.NSN_MATCH) {
+          if (util.isNumberMatch(number, candidate.substring(index)) != PhoneNumberUtil.MatchType.NSN_MATCH) {
             return false;
           }
         // This is the extension sign case, in which the 'x' or 'X' should always precede the

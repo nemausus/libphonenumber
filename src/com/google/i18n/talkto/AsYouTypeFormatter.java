@@ -14,10 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.i18n.phonenumbers;
-
-import com.google.i18n.phonenumbers.Phonemetadata.NumberFormat;
-import com.google.i18n.phonenumbers.Phonemetadata.PhoneMetadata;
+package com.google.i18n.talkto;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -61,10 +58,10 @@ public class AsYouTypeFormatter {
   // Character used when appropriate to separate a prefix, such as a long NDD or a country calling
   // code, from the national number.
   private static final char SEPARATOR_BEFORE_NATIONAL_NUMBER = ' ';
-  private static final PhoneMetadata EMPTY_METADATA =
-      new PhoneMetadata().setInternationalPrefix("NA");
-  private PhoneMetadata defaultMetaData;
-  private PhoneMetadata currentMetaData;
+  private static final Phonemetadata.PhoneMetadata EMPTY_METADATA =
+      new Phonemetadata.PhoneMetadata().setInternationalPrefix("NA");
+  private Phonemetadata.PhoneMetadata defaultMetaData;
+  private Phonemetadata.PhoneMetadata currentMetaData;
 
   // A pattern that is used to match character classes in regular expressions. An example of a
   // character class is [1-4].
@@ -113,7 +110,7 @@ public class AsYouTypeFormatter {
   // formatting.
   private String nationalPrefixExtracted = "";
   private StringBuilder nationalNumber = new StringBuilder();
-  private List<NumberFormat> possibleFormats = new ArrayList<NumberFormat>();
+  private List<Phonemetadata.NumberFormat> possibleFormats = new ArrayList<Phonemetadata.NumberFormat>();
 
     // A cache for frequently used country-specific regular expressions.
   private RegexCache regexCache = new RegexCache(64);
@@ -132,10 +129,10 @@ public class AsYouTypeFormatter {
 
   // The metadata needed by this class is the same for all regions sharing the same country calling
   // code. Therefore, we return the metadata for "main" region for this country calling code.
-  private PhoneMetadata getMetadataForRegion(String regionCode) {
+  private Phonemetadata.PhoneMetadata getMetadataForRegion(String regionCode) {
     int countryCallingCode = phoneUtil.getCountryCodeForRegion(regionCode);
     String mainCountry = phoneUtil.getRegionCodeForCountryCode(countryCallingCode);
-    PhoneMetadata metadata = phoneUtil.getMetadataForRegion(mainCountry);
+    Phonemetadata.PhoneMetadata metadata = phoneUtil.getMetadataForRegion(mainCountry);
     if (metadata != null) {
       return metadata;
     }
@@ -148,9 +145,9 @@ public class AsYouTypeFormatter {
   private boolean maybeCreateNewTemplate() {
     // When there are multiple available formats, the formatter uses the first format where a
     // formatting template could be created.
-    Iterator<NumberFormat> it = possibleFormats.iterator();
+    Iterator<Phonemetadata.NumberFormat> it = possibleFormats.iterator();
     while (it.hasNext()) {
-      NumberFormat numberFormat = it.next();
+      Phonemetadata.NumberFormat numberFormat = it.next();
       String pattern = numberFormat.getPattern();
       if (currentFormattingPattern.equals(pattern)) {
         return false;
@@ -173,12 +170,12 @@ public class AsYouTypeFormatter {
   }
 
   private void getAvailableFormats(String leadingThreeDigits) {
-    List<NumberFormat> formatList =
+    List<Phonemetadata.NumberFormat> formatList =
         (isCompleteNumber && currentMetaData.intlNumberFormatSize() > 0)
         ? currentMetaData.intlNumberFormats()
         : currentMetaData.numberFormats();
     boolean nationalPrefixIsUsedByCountry = currentMetaData.hasNationalPrefix();
-    for (NumberFormat format : formatList) {
+    for (Phonemetadata.NumberFormat format : formatList) {
       if (!nationalPrefixIsUsedByCountry || isCompleteNumber ||
           format.isNationalPrefixOptionalWhenFormatting() ||
           phoneUtil.formattingRuleHasFirstGroupOnly(format.getNationalPrefixFormattingRule())) {
@@ -196,9 +193,9 @@ public class AsYouTypeFormatter {
 
   private void narrowDownPossibleFormats(String leadingDigits) {
     int indexOfLeadingDigitsPattern = leadingDigits.length() - MIN_LEADING_DIGITS_LENGTH;
-    Iterator<NumberFormat> it = possibleFormats.iterator();
+    Iterator<Phonemetadata.NumberFormat> it = possibleFormats.iterator();
     while (it.hasNext()) {
-      NumberFormat format = it.next();
+      Phonemetadata.NumberFormat format = it.next();
       if (format.leadingDigitsPatternSize() > indexOfLeadingDigitsPattern) {
         Pattern leadingDigitsPattern =
             regexCache.getPatternForRegex(
@@ -212,7 +209,7 @@ public class AsYouTypeFormatter {
     }
   }
 
-  private boolean createFormattingTemplate(NumberFormat format) {
+  private boolean createFormattingTemplate(Phonemetadata.NumberFormat format) {
     String numberPattern = format.getPattern();
 
     // The formatter doesn't format numbers when numberPattern contains "|", e.g.
@@ -416,7 +413,7 @@ public class AsYouTypeFormatter {
    * instead of any other formatting template whose leadingDigitsPattern also matches the input.
    */
   String attemptToFormatAccruedDigits() {
-    for (NumberFormat numberFormat : possibleFormats) {
+    for (Phonemetadata.NumberFormat numberFormat : possibleFormats) {
       Matcher m = regexCache.getPatternForRegex(numberFormat.getPattern()).matcher(nationalNumber);
       if (m.matches()) {
         shouldAddSpaceAfterNationalPrefix =

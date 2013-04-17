@@ -18,7 +18,7 @@
  * Please don't modify it directly.
  */
 
-package com.google.i18n.phonenumbers;
+package com.google.i18n.talkto;
 
 import java.util.HashSet;
 import java.util.Set;

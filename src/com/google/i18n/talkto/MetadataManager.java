@@ -14,17 +14,13 @@
  * limitations under the License.
  */
 
-package com.google.i18n.phonenumbers;
-
-import com.google.i18n.phonenumbers.Phonemetadata.PhoneMetadata;
-import com.google.i18n.phonenumbers.Phonemetadata.PhoneMetadataCollection;
+package com.google.i18n.talkto;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
@@ -43,8 +39,8 @@ class MetadataManager {
 
   private static final Logger LOGGER = Logger.getLogger(MetadataManager.class.getName());
 
-  private static final Map<Integer, PhoneMetadata> callingCodeToAlternateFormatsMap =
-      Collections.synchronizedMap(new HashMap<Integer, PhoneMetadata>());
+  private static final Map<Integer, Phonemetadata.PhoneMetadata> callingCodeToAlternateFormatsMap =
+      Collections.synchronizedMap(new HashMap<Integer, Phonemetadata.PhoneMetadata>());
 
   // A set of which country calling codes there are alternate format data for. If the set has an
   // entry for a code, then there should be data for that code linked into the resources.
@@ -70,9 +66,9 @@ class MetadataManager {
     ObjectInputStream in = null;
     try {
       in = new ObjectInputStream(source);
-      PhoneMetadataCollection alternateFormats = new PhoneMetadataCollection();
+      Phonemetadata.PhoneMetadataCollection alternateFormats = new Phonemetadata.PhoneMetadataCollection();
       alternateFormats.readExternal(in);
-      for (PhoneMetadata metadata : alternateFormats.getMetadataList()) {
+      for (Phonemetadata.PhoneMetadata metadata : alternateFormats.getMetadataList()) {
         callingCodeToAlternateFormatsMap.put(metadata.getCountryCode(), metadata);
       }
     } catch (IOException e) {
@@ -82,7 +78,7 @@ class MetadataManager {
     }
   }
 
-  static PhoneMetadata getAlternateFormatsForCountry(int countryCallingCode) {
+  static Phonemetadata.PhoneMetadata getAlternateFormatsForCountry(int countryCallingCode) {
     if (!countryCodeSet.contains(countryCallingCode)) {
       return null;
     }

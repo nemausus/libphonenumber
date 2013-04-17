@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.google.i18n.phonenumbers;
+package com.google.i18n.talkto;
 
-import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
+import com.google.i18n.talkto.Phonenumber.PhoneNumber;
 
 import java.util.Arrays;
 

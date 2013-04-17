@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.google.i18n.phonenumbers;
+package com.google.i18n.talkto;
 
-import com.google.i18n.phonenumbers.Phonemetadata.NumberFormat;
-import com.google.i18n.phonenumbers.Phonemetadata.PhoneMetadata;
-import com.google.i18n.phonenumbers.Phonemetadata.PhoneMetadataCollection;
-import com.google.i18n.phonenumbers.Phonemetadata.PhoneNumberDesc;
-import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
-import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber.CountryCodeSource;
+import com.google.i18n.talkto.Phonemetadata.NumberFormat;
+import com.google.i18n.talkto.Phonemetadata.PhoneMetadata;
+import com.google.i18n.talkto.Phonemetadata.PhoneMetadataCollection;
+import com.google.i18n.talkto.Phonemetadata.PhoneNumberDesc;
+import com.google.i18n.talkto.Phonenumber.PhoneNumber;
+import com.google.i18n.talkto.Phonenumber.PhoneNumber.CountryCodeSource;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -2616,10 +2616,10 @@ public class PhoneNumberUtil
     }
 
     /**
-     * Gets an {@link com.google.i18n.phonenumbers.AsYouTypeFormatter} for the specific region.
+     * Gets an {@link AsYouTypeFormatter} for the specific region.
      *
      * @param regionCode the region where the phone number is being entered
-     * @return an {@link com.google.i18n.phonenumbers.AsYouTypeFormatter} object, which can be used
+     * @return an {@link AsYouTypeFormatter} object, which can be used
      *         to format phone numbers in the specific region "as you type"
      */
     public AsYouTypeFormatter getAsYouTypeFormatter(String regionCode)
@@ -2957,7 +2957,7 @@ public class PhoneNumberUtil
 
     /**
      * Parses a string and returns it in proto buffer format. This method will throw a
-     * {@link com.google.i18n.phonenumbers.NumberParseException} if the number is not considered to be
+     * {@link NumberParseException} if the number is not considered to be
      * a possible number. Note that validation of whether the number is actually a valid number for a
      * particular region is not performed. This can be done separately with {@link #isValidNumber}.
      *
