@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.google.i18n.phonenumbers;
+package com.google.i18n.talkto;
 
-import com.google.i18n.phonenumbers.Phonemetadata.PhoneMetadata;
+import com.google.i18n.talkto.Phonemetadata.PhoneMetadata;
 
 import java.util.regex.Pattern;
 

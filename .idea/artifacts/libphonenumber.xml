@@ -7,7 +7,7 @@
       </element>
       <element id="module-output" name="libphonenumber" />
       <element id="directory" name="data">
-        <element id="dir-copy" path="$PROJECT_DIR$/src/com/google/i18n/phonenumbers/data" />
+        <element id="dir-copy" path="$PROJECT_DIR$/src/com/google/i18n/talkto/data" />
       </element>
     </root>
   </artifact>

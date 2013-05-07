@@ -1,5 +1,8 @@
 package com.google.i18n.phonenumbers;
 
+import com.google.i18n.talkto.NumberParseException;
+import com.google.i18n.talkto.PhoneNumberUtil;
+import com.google.i18n.talkto.Phonenumber;
 import org.junit.Test;
 
 import java.io.BufferedReader;
